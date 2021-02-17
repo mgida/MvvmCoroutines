@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvvmcoroutines.R
 import com.example.mvvmcoroutines.adapters.UserAdapter
-import com.example.mvvmcoroutines.repositary.UserRepository
+import com.example.mvvmcoroutines.repository.UserRepository
 import com.example.mvvmcoroutines.utils.Resource
 import com.example.mvvmcoroutines.view_model.UserViewModel
 import com.example.mvvmcoroutines.view_model.UserViewModelFactory

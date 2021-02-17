@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mvvmcoroutines.model.UserResponse
-import com.example.mvvmcoroutines.repositary.UserRepository
+import com.example.mvvmcoroutines.repository.UserRepository
 import com.example.mvvmcoroutines.utils.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -16,7 +16,6 @@ class UserViewModel(private val userRepo: UserRepository) : ViewModel() {
     init {
         getUsers()
     }
-
 
     private fun getUsers() = viewModelScope.launch {
         users.postValue(Resource.Loading())

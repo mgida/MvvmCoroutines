@@ -1,4 +1,4 @@
-package com.example.mvvmcoroutines.repositary
+package com.example.mvvmcoroutines.repository
 
 import com.example.mvvmcoroutines.rest.RetrofitInstance
 
