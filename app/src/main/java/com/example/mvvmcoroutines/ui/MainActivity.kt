@@ -11,8 +11,8 @@ import com.example.mvvmcoroutines.R
 import com.example.mvvmcoroutines.adapters.UserAdapter
 import com.example.mvvmcoroutines.repository.UserRepository
 import com.example.mvvmcoroutines.utils.Resource
-import com.example.mvvmcoroutines.view_model.UserViewModel
-import com.example.mvvmcoroutines.view_model.UserViewModelFactory
+import com.example.mvvmcoroutines.ui.view_model.UserViewModel
+import com.example.mvvmcoroutines.ui.view_model.UserViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
 
 const val TAG = "MainActivity"
@@ -30,7 +30,10 @@ class MainActivity : AppCompatActivity() {
 
 
         val userRepositary = UserRepository()
-        val userViewModelFactory = UserViewModelFactory(userRepositary)
+        val userViewModelFactory =
+            UserViewModelFactory(
+                userRepositary
+            )
         userViewModel = ViewModelProvider(this, userViewModelFactory)[UserViewModel::class.java]
 
 

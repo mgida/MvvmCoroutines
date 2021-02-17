@@ -1,4 +1,4 @@
-package com.example.mvvmcoroutines.view_model
+package com.example.mvvmcoroutines.ui.view_model
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

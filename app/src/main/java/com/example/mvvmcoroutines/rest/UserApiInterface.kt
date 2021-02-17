@@ -8,5 +8,4 @@ interface UserApiInterface {
 
     @GET("users")
     suspend fun getUsers(): Response<UserResponse>
-
 }

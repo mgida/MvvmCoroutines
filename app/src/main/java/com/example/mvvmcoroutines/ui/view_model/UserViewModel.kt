@@ -1,4 +1,4 @@
-package com.example.mvvmcoroutines.view_model
+package com.example.mvvmcoroutines.ui.view_model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,6 +31,4 @@ class UserViewModel(private val userRepo: UserRepository) : ViewModel() {
         }
         return Resource.Error(errorMessage = usersResponse.message())
     }
-
-
 }
