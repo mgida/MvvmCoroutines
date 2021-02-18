@@ -1,5 +1,6 @@
 package com.example.mvvmcoroutines.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvvmcoroutines.R
 import com.example.mvvmcoroutines.adapters.UserAdapter
+import com.example.mvvmcoroutines.model.UserResponseItem
 import com.example.mvvmcoroutines.repository.UserRepository
 import com.example.mvvmcoroutines.utils.Resource
 import com.example.mvvmcoroutines.ui.view_model.UserViewModel
@@ -27,7 +29,6 @@ class MainActivity : AppCompatActivity() {
 
         userAdapter = UserAdapter()
         setUpRecyclerView()
-
 
         val userRepositary = UserRepository()
         val userViewModelFactory =
@@ -56,8 +57,17 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        userAdapter.onItemClick = { user ->
+            startDetailActivityOf(user)
+        }
+
     }
 
+    private fun startDetailActivityOf(user: UserResponseItem) {
+        val intent = Intent(this@MainActivity, UserDetailActivity::class.java)
+        intent.putExtra("userKey", user)
+        startActivity(intent)
+    }
 
     private fun hideProgressbar() {
         pb_indicator.visibility = View.INVISIBLE
