@@ -12,7 +12,15 @@ import kotlinx.android.synthetic.main.user_list_item.view.*
 
 class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
-    inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    var onItemClick: ((UserResponseItem) -> Unit)? = null
+
+    inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        init {
+            itemView.setOnClickListener {
+                onItemClick?.invoke(differ.currentList[adapterPosition])
+            }
+        }
+    }
 
     private val differCallback = object : DiffUtil.ItemCallback<UserResponseItem>() {
         override fun areItemsTheSame(
