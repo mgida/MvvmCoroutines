@@ -4,12 +4,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvvmcoroutines.R
 import com.example.mvvmcoroutines.adapters.UserAdapter
+import com.example.mvvmcoroutines.database.UserDatabase
 import com.example.mvvmcoroutines.model.UserResponseItem
 import com.example.mvvmcoroutines.repository.UserRepository
 import com.example.mvvmcoroutines.utils.Resource
@@ -22,18 +27,20 @@ const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
     lateinit var userViewModel: UserViewModel
     lateinit var userAdapter: UserAdapter
+    lateinit var db: UserDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        db = UserDatabase.getInstance(applicationContext)
         userAdapter = UserAdapter()
         setUpRecyclerView()
 
-        val userRepositary = UserRepository()
+        val userRepository = UserRepository(db)
         val userViewModelFactory =
             UserViewModelFactory(
-                userRepositary
+                userRepository
             )
         userViewModel = ViewModelProvider(this, userViewModelFactory)[UserViewModel::class.java]
 
@@ -85,4 +92,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.user_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.save_user -> {
+                userViewModel.getSavedUsers().observe(this, Observer {
+                    Toast.makeText(applicationContext, "${it.count()}", Toast.LENGTH_LONG).show()
+                })
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+
+        }
+    }
 }

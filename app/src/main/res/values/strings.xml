@@ -2,4 +2,6 @@
     <string name="app_name">MvvmCoroutines</string>
     <string name="userName">Leanne Graham</string>
     <string name="userPhone">024-648-3804</string>
+    <string name="saved_users">saved users</string>
+    <string name="save">save</string>
 </resources>

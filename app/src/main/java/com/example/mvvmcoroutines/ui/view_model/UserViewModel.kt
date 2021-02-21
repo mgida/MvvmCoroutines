@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mvvmcoroutines.model.UserResponse
+import com.example.mvvmcoroutines.model.UserResponseItem
 import com.example.mvvmcoroutines.repository.UserRepository
 import com.example.mvvmcoroutines.utils.Resource
 import kotlinx.coroutines.launch
@@ -31,4 +32,10 @@ class UserViewModel(private val userRepo: UserRepository) : ViewModel() {
         }
         return Resource.Error(errorMessage = usersResponse.message())
     }
+
+    fun insert(userResponseItem: UserResponseItem) = viewModelScope.launch {
+        userRepo.insert(userResponseItem)
+    }
+
+    fun getSavedUsers() = userRepo.getSavedUsers()
 }
